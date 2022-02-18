@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&family=Libre+Baskerville:wght@700&family=Source+Code+Pro:wght@600&display=swap');
+
+html {
+    overflow:auto;
+}
+
+head {
+    align-self: start;
+}
+
+nav {
+
+}
+
+main {
+
+}
+
+.banner {
+    background-color: cornflowerblue;
+    color: black;
+    font-family: 'Source Code Pro', sans-serif;
+}
+
+.navigation {
+    flex-flow:column wrap;
+    justify-content:flex-start;
+    align-items: center;
+}
+
+.main {
+    margin: 18px;
+    border-radius: 8px;
+    padding: 20px;
+    flex-flow: row wrap;
+    align-items:flex-start;
+    justify-content:left;
+}
+
+.section-title {
+    font-family: 'Source Code Pro', sans-serif;
+    color: ghostwhite;
+    justify-content: center;
+}
+
+.article {
+    font-family: 'Libre Baskerville' serif;
+    color: whitesmoke;
+    flex-flow:column wrap;
+    justify-content:flex-start;
+    align-self:auto;
+}
+
+.menu {
+    font-family: 'Cairo', monospace;
+    color:mediumslateblue;
+    flex-flow:row wrap;
+    justify-content: flex-start;
+    align-content: space-between;
+}
+
+.form {
+
+}
+
+#contact-form {
+
+}
+
+#blog-title {
+
+}
+
+#blog-home-text {
+
+}
+
+#blog-post-menu {
+
+}
+
+#about-me-section {
+
+}
+
+#about-me-text {
+
+}
+
+#about-me-title {
+
+}
+
+#current-projects-section {
+
+}
+
+#current-projects-text {
+
+}
+
+#current-projects-title {
+
+}
