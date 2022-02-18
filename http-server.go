@@ -22,9 +22,21 @@ func TestSimpleHTTPServer(t *testing.T) {
 		// http.TimeoutHandler() is a middleware function before requests are sent to http.DefaultHandler()
 		Handler: http.TimeoutHandler(
 			handlers.DefaultHandler(), 2*time.Minute, ""),
-		IdleTimeout:       5 * time.Minute,
+		// The length of time clients can remain idle between requests
+		IdleTimeout: 5 * time.Minute,
+		// How long the server should wait to read a request header
 		ReadHeaderTimeout: time.Minute,
 	}
+
+	//
+	/*
+		srv := &http.Server{
+			Addr: "127.0.0.1:8081",
+			Handler: mux,
+			IdleTimeout: 5 * time.Minute,
+			ReadHeaderTimeout: time.Minute,
+		}
+	*/
 
 	// Create a new listener bound to the server's address
 	l, err := net.Listen("tcp", srv.Addr)
@@ -40,6 +52,16 @@ func TestSimpleHTTPServer(t *testing.T) {
 			t.Error(err)
 		}
 	}()
+
+	// This would allow me to add TLS support with the proper certificates
+	/*
+		go func() {
+			err := srv.ServeTLS(l, "cert.pem", "key.pem")
+			if err != http.ErrServerClosed {
+				t.Error(err)
+			}
+		}()
+	*/
 
 	// Setting a struct for HTTP Request Test Cases
 	testCases := []struct {
@@ -60,7 +82,7 @@ func TestSimpleHTTPServer(t *testing.T) {
 
 	// establishing a client
 	client := new(http.Client)
-	formatting the filepath in the server
+	// formatting the filepath in the server
 	path := fmt.Sprintf("http://%s/", srv.Addr)
 
 	// iterate over testcases
