@@ -3,11 +3,16 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"io/ioutil"
+	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"testing"
+	"time"
 )
 
 // Struct to hold basic user data
@@ -102,4 +107,69 @@ func TestPostUser(t *testing.T) {
 	}
 	// Close the response body
 	_ = resp.Body.Close()
+}
+
+// Function to test a multi-part POST request to our server
+func TestMultipartPost(t *testing.T) {
+	// create a buffer to hold our request body
+	reqBody := new(bytes.Buffer)
+	// create a writer which will let us write in multiple parts at once in our request body
+	w := multipart.NewWriter(reqBody)
+
+	// JSON encoding in multiples
+	for k, v := range map[string]string{
+		// format the current time
+		"date": time.Now().Format(time.RFC3339),
+		// a description of our post request content
+		"description": "Form values with attached files",
+	} {
+		// write our post request
+		err := w.WriteField(k, v)
+		// if error occurs
+		if err != nil {
+			// log and safely exit
+			t.Fatal(err)
+		}
+	}
+
+	// loop through byte string and assign two filepaths as values
+	for i, file := range []string{
+		"./files/hello.txt",
+		"./files/goodbye.txt",
+	} {
+		// format filepath
+		filePart, err := w.CreateFormFile(fmt.Sprintf("file%d", i+1),
+			filepath.Base(file))
+		// if error occurs
+		if err != nil {
+			// log and safely exit
+			t.Fatal(err)
+		}
+
+		// open the filestream
+		f, err := os.Open(file)
+		// if error occurs
+		if err != nil {
+			// log and safely exit program
+			t.Fatal(err)
+		}
+
+		// copy the filestream
+		_, err = io.Copy(filePart, f)
+		// close the filestream
+		_ = f.Close()
+		// check if there is an error
+		if err != nil {
+			// Log and exit safely
+			t.Fatal(err)
+		}
+	}
+
+	// close the post request
+	err := w.Close()
+	// check if error occured
+	if err != nil {
+		// log and exit safely if error occurs
+		t.Fatal(err)
+	}
 }
