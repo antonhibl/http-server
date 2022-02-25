@@ -7,6 +7,7 @@ import (
 
 func teapotHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusTeapot)
+	w.Write([]byte("<html><h1><a href='https://datatracker.ietf.org/doc/html/rfc2324/'>HTCPTP</h1><html>"))
 }
 
 func faviconHandler(w http.ResponseWriter, r *http.Request) {
