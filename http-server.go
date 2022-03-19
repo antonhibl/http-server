@@ -6,12 +6,14 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 type BlogPost struct {
-	Title       string `json:"title"`
-	Timestamp   string `json:"timestamp"`
-	Main        string `json:"main"`
+	Title       string   `json:"title"`
+	Timestamp   string   `json:"timestamp"`
+	Main        []string `json:"main"`
+	ParsedMain  string
 	ContentInfo string `json:"content_info"`
 }
 
@@ -20,7 +22,7 @@ var blogTemplate = template.Must(template.ParseFiles("./assets/docs/blogtemplate
 func blogHandler(w http.ResponseWriter, r *http.Request) {
 	blogstr := r.URL.Path[len("/blog/"):] + ".json"
 
-	f, err := os.Open(blogstr)
+	f, err := os.Open("db/" + blogstr)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
@@ -32,6 +34,9 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
+	post.ParsedMain = strings.Join(post.Main, "")
+
 	if err := blogTemplate.Execute(w, post); err != nil {
 		log.Println(err)
 	}
