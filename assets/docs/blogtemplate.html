@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic JSON Events</title>
+    <link rel="stylesheet" href="/blogtemplate.css"></style>
+</head>
+<body>
+    <section id="title">
+        <h1 id="text-title">{{.Title}}</h1>
+        <time id="timestamp">
+		    {{.Timestamp}}
+        </time>
+    </section>
+    <nav role="navigation" id="site-nav">
+        <ul id="sitemap">
+        </ul>
+    </nav>
+    <main role="main" id="main">
+		{{.Main}}
+    </main>
+    <footer role="contentinfo" id="footer">
+        <section id="content-info" role="contentinfo">
+			{{.ContentInfo}}
+        </section>
+        <form id="contact-form" role="form">
+        <address>
+            Contact me by <a id="my-email" href="mailto:antonhibl11@gmail.com" class="my-email">e-mail</a>
+        </address>
+        </form>
+    </footer>
+<script src="/blogtemplate.js">
+</script>
+</body>
+</html>
