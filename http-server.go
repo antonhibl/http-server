@@ -10,11 +10,10 @@ import (
 )
 
 type BlogPost struct {
-	Title       string   `json:"title"`
-	Timestamp   string   `json:"timestamp"`
-	Main        []string `json:"main"`
-	ParsedMain  string
-	ContentInfo string `json:"content_info"`
+	Title      string   `json:"title"`
+	Timestamp  string   `json:"timestamp"`
+	Main       []string `json:"main"`
+	ParsedMain string
 }
 
 var blogTemplate = template.Must(template.ParseFiles("./assets/docs/blogtemplate.html"))
