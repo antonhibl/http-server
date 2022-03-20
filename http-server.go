@@ -46,7 +46,7 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// parse the post's object data into the template
-	post.ParsedMain = template.HTML(strings.Join(post.Main, ""))
+	post.ParsedMain = template.HTML(strings.Join(post.Main, " "))
 
 	// execute and serve the template
 	if err := blogTemplate.Execute(w, post); err != nil {
