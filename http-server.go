@@ -13,7 +13,7 @@ type BlogPost struct {
 	Title      string   `json:"title"`
 	Timestamp  string   `json:"timestamp"`
 	Main       []string `json:"main"`
-	ParsedMain string
+	ParsedMain template.HTML
 }
 
 var blogTemplate = template.Must(template.ParseFiles("./assets/docs/blogtemplate.html"))
@@ -34,7 +34,7 @@ func blogHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	post.ParsedMain = strings.Join(post.Main, "")
+	post.ParsedMain = template.HTML(strings.Join(post.Main, ""))
 
 	if err := blogTemplate.Execute(w, post); err != nil {
 		log.Println(err)

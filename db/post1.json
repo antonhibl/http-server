@@ -7,7 +7,7 @@
         "my own thoughts and experiences as a programmer and cybersecurity researcher; things ",
         "like tutorials, thought-pieces, and journals on my own projects progress will be ",
         "posted here. I look forward to getting more used to writing and sharing my own story, ",
-        "I think it will help me learn from doing and also hearing feedback from others.\n\n",
+        "I think it will help me learn from doing and also hearing feedback from others.<br><br>",
         "I utilized a handler function to dynamically read from my JSON database and template ",
         "data into my HTML template using the go html/template package as well as the encoding/json ",
         "to handling reading those objects. Next I had to make sure my CSS and JavaScript assets ",
